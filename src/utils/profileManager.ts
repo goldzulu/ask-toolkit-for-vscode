@@ -14,10 +14,11 @@ export class ProfileManager {
     /**
      * Initialize the profile manager. The profile manager will cache the profile list
      * if they exist, or show an error message with an option to initialize the ASK CLI v1
+     * TODO: Don't work as ask configure -l is missing
      */
     public static init() {
         try {
-            const listProfileOutput = execa.shellSync('ask init -l');
+            const listProfileOutput = execa.shellSync('ask configure -l');
             if ((listProfileOutput.stderr && listProfileOutput.stderr.includes(ERROR_AND_WARNING.EMPTY_PROFILE_MESSAGE)) || listProfileOutput.stdout.trim().length === 0) {
                 return;
             }
